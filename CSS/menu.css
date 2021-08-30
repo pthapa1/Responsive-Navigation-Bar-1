@@ -1,20 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 :root {
-  --font-size: 1rem;
-  --text-primary: #000000;
-  --text-secondary: #415d80;
-  --bg-primary: #ffffff;
-  --bg-hover: #5f84e1;
-  --bg-secondary: #f3f8fd;
   --ff-primary: 'Roboto', sans-serif;
-  --ff-secondary: 'Ballet', cursive;
-  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.01);
-  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  --max-width: 1170px;
-  --fixed-width: 620px;
-  --spacing: 0.1rem;
-  --transition: all 0.1s liner;
 }
 *,
 *::before,
@@ -33,12 +20,17 @@
 }
 .navigation {
   display: flex;
+  gap: 1rem;
   justify-content: space-around;
-  align-items: center;
-  padding: 0em 1.5em; /*This is causing problem. */
+  place-items: center;
+  padding: 0em 1em;
   max-width: 1280px;
   margin: 0 auto;
-  /* height: 6vh; */
+  position: sticky;
+}
+.logo-link {
+  display: flex;
+  place-items: center;
 }
 
 body > header > nav > div > button {
@@ -60,20 +52,29 @@ body > header > nav > div > button {
   margin-left: 1em;
   list-style-type: none;
 }
-.logo {
-  padding: 0.25em 0em;
+@media only screen and (min-width: 767px) {
+  .logo-link {
+    padding: 0.2em 0;
+  }
 }
 
 @media only screen and (max-width: 767px) {
+  .navigation {
+    justify-content: space-between;
+    margin: 0 auto;
+  }
   .nav-menu {
-    position: fixed;
+    position: absolute;
     right: -100%;
-    top: 63px; /* Exact height of the navigation bar which is logo and it's padding. */
+    opacity: 0;
+    pointer-events: none;
+    top: 55px;
+    /* Exact height of svg logo. Which determines the height of the header.*/
     display: flex;
     flex-direction: column;
     width: 100vw;
     text-align: center;
-    transition: 0.5s;
+    transition: 0.3s;
     z-index: 9999;
     background-color: #425cb3;
     max-height: 500px;
@@ -93,14 +94,14 @@ body > header > nav > div > button {
 
   .nav-menu.active {
     right: 0;
+    opacity: 1;
+    pointer-events: all;
   }
-  .navigation {
-    justify-content: space-between;
-    margin: 0 auto;
-    padding-left: 0;
-    /* padding-right: 0; */
-  }
+
   body > header > nav > object {
     margin-left: 1.5em; /*making sure the logo object has enough space on the left equal to the navigation's padding */
+  }
+  .logo {
+    padding: 0.25em 0em;
   }
 }
